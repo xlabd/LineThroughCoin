@@ -1,6 +1,5 @@
 import numpy as np 
 import cv2 
-from skimage import morphology
 
 '''Reading'''
 img = cv2.imread('coin.jpg', 0)         #read
@@ -51,9 +50,23 @@ for c in contours:
     # calculate x,y coordinate of center
     cX = int(M["m10"] / M["m00"])
     cY = int(M["m01"] / M["m00"])
-    cv2.circle(centroids, (cX, cY), 10, (255, 255, 255), -1)
+    cv2.circle(centroids, (cX, cY), 50, (255, 255, 255), -1)
 cv2.imshow("Centroids", centroids)                      # Display images.
+    
+'''finding centroids in a line'''
+coins=0
+for x in range(25, width-25, 10):
+    for y in range(25, height-25, 10):
+        testing, pixelg, pixelb=centroids[y, x]
+        if testing>1:
+            coins+=1
+            y+=105
+    if coins>1:
+        #print(coins)
+        cv2.line(centroids, (x, 0), (x, height), (255, 255, 255), 2)
+        x+=105
+        coins=0
+cv2.imshow("Lines", centroids)                      # Display images.
+
 if cv2.waitKey(0) & 0xff == 27:  
     cv2.destroyAllWindows()             # De-allocate any associated memory usage
-    
-''''''

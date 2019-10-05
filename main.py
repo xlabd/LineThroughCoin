@@ -2,6 +2,7 @@ import numpy as np
 import cv2 
 
 '''Reading'''
+image = cv2.imread('coin.jpg')
 img = cv2.imread('coin.jpg', 0)         #read
 cv2.imshow('image', img)                #show
 k = cv2.waitKey(0) & 0xFF               
@@ -55,18 +56,24 @@ cv2.imshow("Centroids", centroids)                      # Display images.
     
 '''finding centroids in a line'''
 coins=0
-for x in range(25, width-25, 10):
-    for y in range(25, height-25, 10):
+x=25
+y=25
+while x < (width-25):
+    while y <= (height-25):
         testing, pixelg, pixelb=centroids[y, x]
         if testing>1:
             coins+=1
             y+=105
+        else:
+            y+=10
     if coins>1:
-        #print(coins)
-        cv2.line(centroids, (x, 0), (x, height), (255, 255, 255), 2)
+        cv2.line(image, (x, 0), (x, height), (255, 255, 255), 10)
         x+=105
-        coins=0
-cv2.imshow("Lines", centroids)                      # Display images.
+    else:
+        x+=10
+    coins=0
+    y=25
+cv2.imshow("Lines", image)                      # Display images.
 
 if cv2.waitKey(0) & 0xff == 27:  
     cv2.destroyAllWindows()             # De-allocate any associated memory usage

@@ -4,7 +4,7 @@ import cv2
 '''Reading'''
 image = cv2.imread('coin.jpg')
 img = cv2.imread('coin.jpg', 0)         #read
-cv2.imshow('image', img)                #show
+cv2.imshow('image', image)                #show
 k = cv2.waitKey(0) & 0xFF               
 if k == 27:  
     cv2.destroyAllWindows()             # wait for ESC key to exit
@@ -52,7 +52,7 @@ for c in contours:
     cX = int(M["m10"] / M["m00"])
     cY = int(M["m01"] / M["m00"])
     cv2.circle(centroids, (cX, cY), 50, (255, 255, 255), -1)
-cv2.imshow("Centroids", centroids)                      # Display images.
+#cv2.imshow("Centroids", centroids)                      # Display images.
     
 '''traversing line and finding centroids'''
 coins=0

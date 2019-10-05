@@ -54,7 +54,7 @@ for c in contours:
     cv2.circle(centroids, (cX, cY), 50, (255, 255, 255), -1)
 cv2.imshow("Centroids", centroids)                      # Display images.
     
-'''finding centroids in a line'''
+'''traversing line and finding centroids'''
 coins=0
 x=25
 y=25
@@ -67,8 +67,8 @@ while x < (width-25):
         else:
             y+=10
     if coins>1:
-        cv2.line(image, (x, 0), (x, height), (255, 255, 255), 10)
-        x+=105
+        cv2.line(image, (x+50, 0), (x+50, height), (255, 255, 255), 10)
+        x+=205
     else:
         x+=10
     coins=0
